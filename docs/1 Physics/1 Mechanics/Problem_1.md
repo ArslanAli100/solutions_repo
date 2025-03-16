@@ -22,12 +22,12 @@ The motion of the projectile can be broken down into **horizontal (x-direction)*
 
 #### **2.2 Decomposing Initial Velocity**
 The initial velocity \( v_0 \) is split into horizontal and vertical components:
-\[
+$$
 v_{0x} = v_0 \cos\theta
-\]
-\[
+$$
+$$
 v_{0y} = v_0 \sin\theta
-\]
+$$
 
 ---
 
