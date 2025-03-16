@@ -118,8 +118,11 @@ R_{\text{max}} = \frac{v_0^2}{g}
 ### **7. Graphical Representation**
 Let's visualize how the range varies with launch angle.
 
+![alt text](image.png)
+![alt text](image-1.png)
 #### **Python Code for Simulation**
 This script plots:
+
 1. The trajectory of a projectile.
 2. The range as a function of launch angle.
 
@@ -128,9 +131,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Constants
-g = 9.81  # gravity (m/s^2)
-v0 = 20   # initial velocity (m/s)
-angles = np.linspace(0, 90, 100)  # launch angles in degrees
+g = 9.81  # Gravity (m/s^2)
+v0 = 20   # Initial velocity (m/s)
+angles = np.linspace(0, 90, 100)  # Launch angles from 0 to 90 degrees
 
 # Function to compute projectile range
 def projectile_range(theta, v0, g=9.81):
@@ -140,16 +143,34 @@ def projectile_range(theta, v0, g=9.81):
 # Compute ranges for different angles
 ranges = [projectile_range(theta, v0) for theta in angles]
 
-# Plot range vs. angle
+# Trajectory Simulation for a specific angle (e.g., 45°)
+theta_trajectory = 45  # Change this to see different angles
+t_flight = (2 * v0 * np.sin(np.radians(theta_trajectory))) / g
+t = np.linspace(0, t_flight, num=100)
+x = v0 * np.cos(np.radians(theta_trajectory)) * t
+y = v0 * np.sin(np.radians(theta_trajectory)) * t - 0.5 * g * t**2
+
+# Plot 1: Projectile Trajectory
 plt.figure(figsize=(8, 6))
-plt.plot(angles, ranges, label=f'Initial velocity: {v0} m/s', color='b')
-plt.axvline(45, linestyle="--", color="r", label="Max range at 45°")
+plt.plot(x, y, label=f'Trajectory at {theta_trajectory}°', color='b')
+plt.xlabel('Horizontal Distance (m)')
+plt.ylabel('Vertical Distance (m)')
+plt.title('Projectile Motion Trajectory')
+plt.legend()
+plt.grid()
+plt.show()
+
+# Plot 2: Range vs Angle
+plt.figure(figsize=(8, 6))
+plt.plot(angles, ranges, label=f'Initial velocity: {v0} m/s', color='r')
+plt.axvline(45, linestyle="--", color="b", label="Max range at 45°")
 plt.xlabel('Launch Angle (degrees)')
 plt.ylabel('Range (m)')
 plt.title('Projectile Range vs. Launch Angle')
 plt.legend()
 plt.grid()
 plt.show()
+
 ```
 
 #### **Graph Analysis**
