@@ -197,5 +197,3 @@ To make the model more realistic, we can:
 
 ### **10. Conclusion**
 Projectile motion is a fundamental concept with rich mathematical structures and numerous applications. By understanding its governing equations, we can predict and optimize trajectories in various real-world scenarios.
-
-Would you like me to extend this with numerical simulations for air resistance or varying gravitational fields? 🚀
