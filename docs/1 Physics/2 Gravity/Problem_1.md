@@ -52,6 +52,8 @@ This is Kepler's Third Law, which states that the square of the orbital period i
 ## **Computational Simulation**
 To validate Kepler's Third Law, we simulate a circular orbit numerically using Python. The simulation uses Newton's laws to model planetary motion under gravitational attraction.
 
+![alt text](image.png)
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
