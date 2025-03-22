@@ -17,7 +17,9 @@ v
 2
 r
 r 
-2\]
+2 \cos\theta
+
+\]
  
 GMm
 ​
