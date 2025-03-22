@@ -120,6 +120,7 @@ Let's visualize how the range varies with launch angle.
 
 ![alt text](image.png)
 ![alt text](image-1.png)
+
 #### **Python Code for Simulation**
 This script plots:
 
