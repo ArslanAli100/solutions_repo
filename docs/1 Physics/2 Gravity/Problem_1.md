@@ -3,9 +3,10 @@
 To solve this problem, we will derive Kepler's Third Law for circular orbits, discuss its astronomical implications, analyze real-world examples, and implement a computational model to verify the relationship.
 
 Derivation of Kepler's Third Law for Circular Orbits
+
 For a circular orbit, the gravitational force provides the centripetal force:
 
-G
+\[G
 M
 m
 r
@@ -16,7 +17,7 @@ v
 2
 r
 r 
-2
+2\]
  
 GMm
 ​
