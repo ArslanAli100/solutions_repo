@@ -32,9 +32,9 @@ where:
 - \( \vec{v} \) is the velocity of the particle.
 
 To simulate the motion of a particle, we can solve the following equations of motion:
-\[
+$$
 \frac{d\vec{v}}{dt} = \frac{\vec{F}}{m} = \frac{q}{m} (\vec{E} + \vec{v} \times \vec{B})
-\]
+$$
 where \( m \) is the mass of the particle.
 
 ### Step-by-Step Implementation of Simulations:
