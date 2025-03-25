@@ -33,9 +33,14 @@ where \( N \) is the number of sources positioned at the vertices of the chosen 
 
 ## **Simulation of Interference Patterns**
 
+![alt text](image-1.png)
+![alt text](image-2.png)
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from mpl_toolkits.mplot3d import Axes3D
 
 # Define wave parameters
 A = 1       # Amplitude
@@ -50,15 +55,21 @@ y = np.linspace(-50, 50, 400)
 X, Y = np.meshgrid(x, y)
 
 # Define function to compute interference pattern
-def interference_pattern(sources, t=0):
+def interference_pattern(sources, t=0, phase_shifts=None):
     Psi = np.zeros_like(X)
-    for (x0, y0) in sources:
+    if phase_shifts is None:
+        phase_shifts = [0] * len(sources)
+    for i, (x0, y0) in enumerate(sources):
         r = np.sqrt((X - x0)**2 + (Y - y0)**2)
-        Psi += A * np.cos(k * r - w * t)
+        Psi += A * np.cos(k * r - w * t + phase_shifts[i])
     return Psi
 
-# Define sources at vertices of an equilateral triangle
-polygon_vertices = [(-20, -10), (20, -10), (0, 20)]
+# Define sources at vertices of different polygons
+def generate_polygon(n_sides, radius=20):
+    return [(radius * np.cos(2 * np.pi * i / n_sides), radius * np.sin(2 * np.pi * i / n_sides)) for i in range(n_sides)]
+
+# Example: Interference from a square configuration
+polygon_vertices = generate_polygon(4)  # Change number for different polygons
 Psi = interference_pattern(polygon_vertices)
 
 # Plot the interference pattern
@@ -68,8 +79,18 @@ plt.colorbar(label='Wave Amplitude')
 plt.scatter(*zip(*polygon_vertices), color='red', marker='o', label='Wave Sources')
 plt.xlabel("X Position")
 plt.ylabel("Y Position")
-plt.title("Interference Pattern from Three Wave Sources")
+plt.title("Interference Pattern from Four Wave Sources")
 plt.legend()
+plt.show()
+
+# 3D Surface Plot
+fig = plt.figure(figsize=(10, 7))
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(X, Y, Psi, cmap='coolwarm', edgecolor='none')
+ax.set_title("3D Surface Plot of Interference")
+ax.set_xlabel("X Position")
+ax.set_ylabel("Y Position")
+ax.set_zlabel("Wave Amplitude")
 plt.show()
 ```
 
@@ -77,6 +98,7 @@ plt.show()
 - **Constructive Interference:** Bright regions indicate where waves reinforce each other, forming high amplitude waves.
 - **Destructive Interference:** Dark regions show cancellation where the crest of one wave meets the trough of another.
 - **Wavefronts:** The contour lines illustrate the wavefronts as they propagate outward from each source.
+- **Phase Difference Effects:** By introducing phase shifts in the sources, different interference patterns can emerge.
 
 ## **Applications of Wave Interference**
 1. **Acoustics:** Understanding sound wave interference helps in noise cancellation and speaker placement in auditoriums.
