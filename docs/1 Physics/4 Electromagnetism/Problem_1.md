@@ -122,13 +122,6 @@ plt.show()
 
 This code simulates a charged particle’s motion in a uniform magnetic field. We use the Euler method for numerical integration. The particle’s trajectory is plotted in the \(XY\)-plane, which should display a circular path as expected for a uniform magnetic field.
 
-Combined Electric and Magnetic Fields (Helical Motion)
-When a particle is subjected to both an electric and a magnetic field, its trajectory can be a helical path if the fields are aligned appropriately. The electric field accelerates the particle along one axis (typically the 
-𝑥
-x-axis), while the magnetic field causes the particle to follow a curved path perpendicular to the velocity. This results in a helical trajectory.
-
-![alt text](image-1.png)
-
 Crossed Electric and Magnetic Fields (Drift Motion)
 When the electric and magnetic fields are crossed (perpendicular to each other), the charged particle experiences a drift motion. The resulting velocity is perpendicular to both the electric and magnetic fields, and the particle moves in a straight line while drifting with a constant velocity.
 
