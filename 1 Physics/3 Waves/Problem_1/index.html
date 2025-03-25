@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Interference Patterns on a Water Surface - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Interference Patterns on a Water Surface";
         var mkdocs_page_input_path = "1 Physics/3 Waves/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -64,8 +64,22 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">3 Waves</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Interference Patterns on a Water Surface</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#motivation">Motivation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-statement">Problem Statement</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mathematical-model">Mathematical Model</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#simulation-of-interference-patterns">Simulation of Interference Patterns</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#analysis-of-interference-patterns">Analysis of Interference Patterns</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#applications-of-wave-interference">Applications of Wave Interference</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -129,7 +143,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">3 Waves</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Interference Patterns on a Water Surface</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -137,66 +151,81 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
-<p>Interference Patterns on a Water Surface</p>
-<p>Motivation</p>
+<h1 id="interference-patterns-on-a-water-surface"><strong>Interference Patterns on a Water Surface</strong></h1>
+<h2 id="motivation"><strong>Motivation</strong></h2>
 <p>Interference occurs when waves from different sources overlap, creating unique patterns. On a water surface, this can be observed when ripples from different points meet, forming interference patterns. These patterns demonstrate how waves combine, either reinforcing or canceling each other.</p>
 <p>Studying these patterns helps us understand wave behavior and key concepts such as phase relationships and multi-source interactions. This task offers an engaging way to explore wave physics and its real-world applications in areas such as acoustics, optics, and fluid dynamics.</p>
-<p>Problem Statement</p>
+<h2 id="problem-statement"><strong>Problem Statement</strong></h2>
 <p>Analyze the interference patterns formed on the water surface due to the superposition of waves emitted from point sources placed at the vertices of a chosen regular polygon.</p>
-<p>Mathematical Model</p>
-<p>A circular wave on the water surface, emanating from a point source located at , can be described by:</p>
-<p>where:</p>
-<p>is the displacement of the water surface at point  and time ,</p>
-<p>is the wave amplitude,</p>
-<p>is the wave number, related to the wavelength  by ,</p>
-<p>is the angular frequency, related to the frequency  by ,</p>
-<p>is the distance from the -th source to the point ,</p>
-<p>is the initial phase.</p>
+<h2 id="mathematical-model"><strong>Mathematical Model</strong></h2>
+<p>A circular wave on the water surface, emanating from a point source located at <span class="arithmatex">\((x_0, y_0)\)</span>, can be described by:</p>
+<div class="arithmatex">\[
+\psi_i(x, y, t) = A \cos(k r_i - \omega t + \phi_0)
+\]</div>
+<p>where:
+- <span class="arithmatex">\( \psi_i(x, y, t) \)</span> is the displacement of the water surface at point <span class="arithmatex">\((x, y)\)</span> and time <span class="arithmatex">\( t \)</span>,
+- <span class="arithmatex">\( A \)</span> is the wave amplitude,
+- <span class="arithmatex">\( k \)</span> is the wave number, related to the wavelength <span class="arithmatex">\( \lambda \)</span> by <span class="arithmatex">\( k = \frac{2\pi}{\lambda} \)</span>,
+- <span class="arithmatex">\( \omega \)</span> is the angular frequency, related to the frequency <span class="arithmatex">\( f \)</span> by <span class="arithmatex">\( \omega = 2\pi f \)</span>,
+- <span class="arithmatex">\( r_i \)</span> is the distance from the <span class="arithmatex">\( i \)</span>-th source to the point <span class="arithmatex">\((x, y)\)</span>,
+- <span class="arithmatex">\( \phi_0 \)</span> is the initial phase.</p>
 <p>Using the principle of superposition, the total displacement at any point on the water surface is:</p>
-<p>where  is the number of sources positioned at the vertices of the chosen regular polygon.</p>
-<p>Simulation of Interference Patterns</p>
-<p>import numpy as np
-import matplotlib.pyplot as plt</p>
-<h1 id="define-wave-parameters">Define wave parameters</h1>
-<p>A = 1       # Amplitude
+<div class="arithmatex">\[
+\Psi(x, y, t) = \sum_{i=1}^{N} \psi_i(x, y, t)
+\]</div>
+<p>where <span class="arithmatex">\( N \)</span> is the number of sources positioned at the vertices of the chosen regular polygon.</p>
+<h2 id="simulation-of-interference-patterns"><strong>Simulation of Interference Patterns</strong></h2>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Define wave parameters
+A = 1       # Amplitude
 wavelength = 10  # Wavelength (arbitrary units)
 k = 2 * np.pi / wavelength  # Wave number
 f = 1       # Frequency (arbitrary units)
-w = 2 * np.pi * f  # Angular frequency</p>
-<h1 id="grid-for-simulation">Grid for simulation</h1>
-<p>x = np.linspace(-50, 50, 400)
+w = 2 * np.pi * f  # Angular frequency
+
+# Grid for simulation
+x = np.linspace(-50, 50, 400)
 y = np.linspace(-50, 50, 400)
-X, Y = np.meshgrid(x, y)</p>
-<h1 id="define-function-to-compute-interference-pattern">Define function to compute interference pattern</h1>
-<p>def interference_pattern(sources, t=0):
+X, Y = np.meshgrid(x, y)
+
+# Define function to compute interference pattern
+def interference_pattern(sources, t=0):
     Psi = np.zeros_like(X)
     for (x0, y0) in sources:
-        r = np.sqrt((X - x0)<strong>2 + (Y - y0)</strong>2)
+        r = np.sqrt((X - x0)**2 + (Y - y0)**2)
         Psi += A * np.cos(k * r - w * t)
-    return Psi</p>
-<h1 id="define-sources-at-vertices-of-an-equilateral-triangle">Define sources at vertices of an equilateral triangle</h1>
-<p>polygon_vertices = [(-20, -10), (20, -10), (0, 20)]
-Psi = interference_pattern(polygon_vertices)</p>
-<h1 id="plot-the-interference-pattern">Plot the interference pattern</h1>
-<p>plt.figure(figsize=(8, 6))
+    return Psi
+
+# Define sources at vertices of an equilateral triangle
+polygon_vertices = [(-20, -10), (20, -10), (0, 20)]
+Psi = interference_pattern(polygon_vertices)
+
+# Plot the interference pattern
+plt.figure(figsize=(8, 6))
 plt.contourf(X, Y, Psi, levels=100, cmap='viridis')
 plt.colorbar(label='Wave Amplitude')
-plt.scatter(<em>zip(</em>polygon_vertices), color='red', marker='o', label='Wave Sources')
+plt.scatter(*zip(*polygon_vertices), color='red', marker='o', label='Wave Sources')
 plt.xlabel("X Position")
 plt.ylabel("Y Position")
 plt.title("Interference Pattern from Three Wave Sources")
 plt.legend()
-plt.show()</p>
-<p>Analysis of Interference Patterns</p>
-<p>Constructive Interference: Bright regions indicate where waves reinforce each other, forming high amplitude waves.</p>
-<p>Destructive Interference: Dark regions show cancellation where the crest of one wave meets the trough of another.</p>
-<p>Wavefronts: The contour lines illustrate the wavefronts as they propagate outward from each source.</p>
-<p>Applications of Wave Interference</p>
-<p>Acoustics: Understanding sound wave interference helps in noise cancellation and speaker placement in auditoriums.</p>
-<p>Optics: Similar principles apply in light interference, such as in double-slit experiments and anti-reflective coatings.</p>
-<p>Water Engineering: Interference patterns assist in analyzing wave behavior in harbors and coastal structures.</p>
-<p>Conclusion</p>
+plt.show()
+</code></pre>
+<h2 id="analysis-of-interference-patterns"><strong>Analysis of Interference Patterns</strong></h2>
+<ul>
+<li><strong>Constructive Interference:</strong> Bright regions indicate where waves reinforce each other, forming high amplitude waves.</li>
+<li><strong>Destructive Interference:</strong> Dark regions show cancellation where the crest of one wave meets the trough of another.</li>
+<li><strong>Wavefronts:</strong> The contour lines illustrate the wavefronts as they propagate outward from each source.</li>
+</ul>
+<h2 id="applications-of-wave-interference"><strong>Applications of Wave Interference</strong></h2>
+<ol>
+<li><strong>Acoustics:</strong> Understanding sound wave interference helps in noise cancellation and speaker placement in auditoriums.</li>
+<li><strong>Optics:</strong> Similar principles apply in light interference, such as in double-slit experiments and anti-reflective coatings.</li>
+<li><strong>Water Engineering:</strong> Interference patterns assist in analyzing wave behavior in harbors and coastal structures.</li>
+</ol>
+<h2 id="conclusion"><strong>Conclusion</strong></h2>
 <p>By placing wave sources at the vertices of a regular polygon, we observe rich interference patterns formed by their superposition. These simulations provide insights into wave behavior, demonstrating fundamental principles of physics in an intuitive and visual manner.</p>
 </div>
 </div><footer>
