@@ -28,6 +28,8 @@ This task uses simulations to help visualize the CLT, which can be challenging t
 The following Python script simulates the CLT using three types of distributions: **Uniform**, **Exponential**, and **Binomial**. We will generate large datasets for each population, sample data from them, calculate sample means for various sample sizes, and visualize the convergence to a normal distribution.
 
 ![alt text](image.png)
+![alt text](image-4.png)
+![alt text](image-5.png)
 
 #### **Step-by-Step Code**:
 
