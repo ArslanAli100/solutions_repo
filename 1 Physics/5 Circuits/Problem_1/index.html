@@ -78,6 +78,26 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#equivalent-resistance-using-graph-theory">Equivalent Resistance Using Graph Theory</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#option-1-simplified-task-algorithm-description">Option 1: Simplified Task – Algorithm Description</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#steps-to-add-visualization">Steps to Add Visualization:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#code-for-graphical-representation">Code for Graphical Representation:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#explanation">Explanation:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#graphical-output">Graphical Output:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#example-output-for-the-above-code">Example Output for the Above Code:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#output-visualization-example">Output Visualization Example:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#conclusion">Conclusion:</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -138,6 +158,193 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h2 id="equivalent-resistance-using-graph-theory">Equivalent Resistance Using Graph Theory</h2>
+<p>In this problem, we aim to use <strong>graph theory</strong> to calculate the <strong>equivalent resistance</strong> of electrical circuits. The fundamental idea is to represent the circuit as a graph, where:
+- <strong>Nodes</strong> represent the junctions (or vertices) in the circuit.
+- <strong>Edges</strong> represent the resistors, with the edge weights corresponding to the resistance values.</p>
+<p>We will provide both a <strong>description of the algorithm</strong> for simplifying circuits and an <strong>example implementation</strong> in Python. We will also discuss how this approach helps to solve complex circuit configurations systematically.</p>
+<h3 id="option-1-simplified-task-algorithm-description"><strong>Option 1: Simplified Task – Algorithm Description</strong></h3>
+<p>The algorithm involves <strong>graph reduction</strong>, where we identify <strong>series</strong> and <strong>parallel connections</strong> of resistors, and iteratively reduce the graph until only one node remains, representing the equivalent resistance of the entire circuit.</p>
+<h4 id="steps-for-the-algorithm"><strong>Steps for the Algorithm</strong>:</h4>
+<ol>
+<li><strong>Graph Representation</strong>:</li>
+<li>The circuit is represented as a <strong>graph</strong> where each edge is a resistor, and the nodes are the junctions.</li>
+<li>
+<p>Each edge has a weight that represents the resistance value of the resistor.</p>
+</li>
+<li>
+<p><strong>Identifying Series and Parallel Connections</strong>:</p>
+</li>
+<li><strong>Series Connection</strong>: If two resistors <span class="arithmatex">\( R_1 \)</span> and <span class="arithmatex">\( R_2 \)</span> are in series (i.e., they are connected end-to-end), the equivalent resistance is:
+     [
+     R_{eq} = R_1 + R_2
+     ]</li>
+<li>
+<p><strong>Parallel Connection</strong>: If two resistors <span class="arithmatex">\( R_1 \)</span> and <span class="arithmatex">\( R_2 \)</span> are in parallel (i.e., both resistors are connected to the same two nodes), the equivalent resistance is:
+     [
+     R_{eq} = \frac{1}{\frac{1}{R_1} + \frac{1}{R_2}}
+     ]</p>
+</li>
+<li>
+<p><strong>Graph Simplification</strong>:</p>
+</li>
+<li>
+<p>The algorithm looks for <strong>series</strong> and <strong>parallel</strong> resistors in the graph. When such combinations are found:</p>
+<ul>
+<li>For <strong>series</strong> connections, the two nodes are merged, and the edge resistance is updated by adding the two resistances.</li>
+<li>For <strong>parallel</strong> connections, the two nodes are merged, and the edge resistance is updated by using the parallel formula.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterative Process</strong>:</p>
+</li>
+<li>
+<p><strong>Repeat</strong> this process, simplifying the graph until only one node is left. The resistance value associated with this node represents the <strong>equivalent resistance</strong> of the entire circuit.</p>
+</li>
+<li>
+<p><strong>Handling Nested Combinations</strong>:</p>
+</li>
+<li>The algorithm handles <strong>nested series and parallel combinations</strong> by recursively applying the rules. As series or parallel combinations are detected, the graph is reduced step-by-step, and the new equivalent resistances are computed for the reduced sections.</li>
+</ol>
+<h4 id="pseudocode"><strong>Pseudocode</strong>:</h4>
+<p>Here is the pseudocode for the algorithm that calculates the equivalent resistance:</p>
+<pre><code class="language-text">1. Initialize the circuit graph (G) with resistors as edges and junctions as nodes.
+2. While there are more than one node:
+    a. Look for series resistors: Two resistors in series if they are connected end-to-end.
+        i. For each pair of resistors in series, replace the pair with a single resistor with resistance R_eq = R1 + R2.
+    b. Look for parallel resistors: Two resistors in parallel if both resistors are connected between the same pair of nodes.
+        i. For each pair of resistors in parallel, replace the pair with a single resistor with resistance R_eq = 1 / (1/R1 + 1/R2).
+    c. Update the graph after each reduction (by removing old resistors and adding the new equivalent resistor).
+3. When only one node remains, the resistance associated with that node is the equivalent resistance of the entire circuit.
+</code></pre>
+<p>To provide graphical representations of the circuit and visualize the equivalent resistance calculations, we can use <strong>NetworkX</strong> for graph handling and <strong>Matplotlib</strong> for plotting the graph.</p>
+<h3 id="steps-to-add-visualization"><strong>Steps to Add Visualization</strong>:</h3>
+<ol>
+<li><strong>Representing the Circuit as a Graph</strong>: We will use <strong>NetworkX</strong> to model the electrical circuit as a graph, where nodes are the junctions and edges are the resistors.</li>
+<li><strong>Graphical Representation</strong>: Use <strong>Matplotlib</strong> to plot the graph and visually represent the components (nodes and edges) of the circuit.</li>
+<li><strong>Labeling the Graph</strong>: We'll label each resistor with its resistance value and provide a visual output for simplified circuits.</li>
+</ol>
+<h3 id="code-for-graphical-representation"><strong>Code for Graphical Representation</strong>:</h3>
+<p>Here’s an example Python code to visualize the circuit before and after simplification, along with the equivalent resistance calculation:</p>
+<p><img alt="alt text" src="../image.png"/>
+<img alt="alt text" src="../image-1.png"/></p>
+<pre><code class="language-python">import matplotlib.pyplot as plt
+import networkx as nx
+
+# Function to visualize the graph
+def plot_graph(G):
+    """
+    Visualizes the graph G using matplotlib.
+    """
+    pos = nx.spring_layout(G)  # Positions for all nodes
+    labels = nx.get_edge_attributes(G, 'resistance')  # Label edges with resistances
+
+    plt.figure(figsize=(8, 6))
+    nx.draw(G, pos, with_labels=True, node_size=2000, node_color='lightblue', font_size=12, font_weight='bold', edge_color='gray', width=2)
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, font_size=10)
+    plt.title('Electrical Circuit Visualization')
+    plt.show()
+
+# Function to simplify the circuit (using series and parallel rules)
+def simplify_circuit(G):
+    """
+    Simplifies the circuit graph using series and parallel combinations.
+    """
+    def series_combination(R1, R2):
+        return R1 + R2
+
+    def parallel_combination(R1, R2):
+        return 1 / (1/R1 + 1/R2)
+
+    # Checking for series combination and simplifying
+    for u, v, data in list(G.edges(data=True)):
+        R = data['resistance']
+
+        # Simplify the circuit: Check for series connections
+        neighbors_u = list(G.neighbors(u))
+        neighbors_v = list(G.neighbors(v))
+
+        if len(neighbors_u) == 1 and len(neighbors_v) == 1:  # Series case
+            new_resistance = series_combination(R, R)  # Combine two resistors in series
+            print(f"Series combination between {u} and {v}. New resistance: {new_resistance}")
+            G[u][v]['resistance'] = new_resistance
+
+        # Check for parallel connections (simplifying using the parallel formula)
+        if len(neighbors_u) == 2 and len(neighbors_v) == 2:
+            new_resistance = parallel_combination(R, R)  # Simplify in parallel
+            print(f"Parallel combination between {u} and {v}. New resistance: {new_resistance}")
+            G[u][v]['resistance'] = new_resistance
+
+    return G
+
+# Example graph creation (before simplification)
+G = nx.Graph()
+G.add_edge('A', 'B', resistance=10)  # Resistor between A and B with 10 ohms
+G.add_edge('B', 'C', resistance=20)  # Resistor between B and C with 20 ohms
+G.add_edge('C', 'D', resistance=30)  # Resistor between C and D with 30 ohms
+
+# Plot the original circuit
+print("Original Circuit:")
+plot_graph(G)
+
+# Simplify the circuit using series and parallel combinations
+simplify_circuit(G)
+
+# Plot the simplified circuit
+print("Simplified Circuit:")
+plot_graph(G)
+</code></pre>
+<h3 id="explanation"><strong>Explanation</strong>:</h3>
+<ol>
+<li><strong>Graph Construction</strong>: We create a graph <code>G</code> using <code>NetworkX</code>, where each edge represents a resistor, and the edge attribute <code>resistance</code> stores the value of the resistor.</li>
+<li><strong>Graph Visualization</strong>:</li>
+<li>We use <code>nx.spring_layout</code> to determine the node positions in the graph.</li>
+<li><code>nx.draw</code> draws the circuit with nodes and edges, and <code>nx.draw_networkx_edge_labels</code> adds labels with the resistor values on each edge.</li>
+<li><strong>Simplification</strong>:</li>
+<li>The <code>simplify_circuit</code> function checks for <strong>series</strong> and <strong>parallel</strong> resistor combinations and simplifies the circuit step-by-step.</li>
+<li>After simplification, we again visualize the updated circuit.</li>
+<li><strong>Output</strong>:</li>
+<li>The circuit is visualized before and after applying simplifications (e.g., combining series and parallel resistors).</li>
+</ol>
+<h3 id="graphical-output"><strong>Graphical Output</strong>:</h3>
+<p>When you run the code, you will see:
+1. <strong>Original Circuit</strong>: The initial configuration of the circuit with labeled resistors.
+2. <strong>Simplified Circuit</strong>: The circuit after applying series and parallel combinations, where some resistors might be replaced by their equivalent resistance.</p>
+<h3 id="example-output-for-the-above-code"><strong>Example Output for the Above Code</strong>:</h3>
+<ul>
+<li><strong>Original Circuit</strong>:</li>
+<li>Resistor between <strong>A</strong> and <strong>B</strong> = 10 ohms</li>
+<li>Resistor between <strong>B</strong> and <strong>C</strong> = 20 ohms</li>
+<li>Resistor between <strong>C</strong> and <strong>D</strong> = 30 ohms</li>
+<li><strong>Simplified Circuit</strong> (after applying the combination rules):</li>
+<li>Resistors between <strong>A</strong> and <strong>D</strong> might be simplified into a single equivalent resistor depending on the simplifications.</li>
+</ul>
+<h3 id="output-visualization-example"><strong>Output Visualization Example</strong>:</h3>
+<p>Here’s what the visualization might look like:
+1. <strong>Before simplification</strong>: The graph will show the original resistors with labels.
+2. <strong>After simplification</strong>: Some of the resistors will be combined into a single equivalent resistance, and this will be reflected in the updated graph.</p>
+<p>You can run this code locally to visualize the circuit and its simplifications. Let me know if you need further modifications or additional features, such as handling more complex circuit topologies!</p>
+<h4 id="testing-the-algorithm"><strong>Testing the Algorithm</strong>:</h4>
+<p>We can test the algorithm with different configurations, such as:
+1. <strong>Simple Series Configuration</strong>:
+   - A series of resistors <span class="arithmatex">\( R_1, R_2, R_3 \)</span> in series.</p>
+<ol>
+<li><strong>Simple Parallel Configuration</strong>:</li>
+<li>
+<p>Two resistors <span class="arithmatex">\( R_1 \)</span> and <span class="arithmatex">\( R_2 \)</span> connected in parallel.</p>
+</li>
+<li>
+<p><strong>Complex Circuit with Multiple Cycles</strong>:</p>
+</li>
+<li>A circuit with both series and parallel combinations and multiple cycles.</li>
+</ol>
+<h4 id="analysis-of-the-algorithms-efficiency"><strong>Analysis of the Algorithm’s Efficiency</strong>:</h4>
+<ul>
+<li><strong>Time Complexity</strong>: The algorithm's efficiency depends on the number of edges and nodes in the graph. Each simplification step reduces the number of resistors, so the time complexity should scale linearly with the number of edges and nodes.</li>
+<li><strong>Space Complexity</strong>: The space complexity is <span class="arithmatex">\( O(N + E) \)</span>, where <span class="arithmatex">\( N \)</span> is the number of nodes and <span class="arithmatex">\( E \)</span> is the number of edges in the graph.</li>
+</ul>
+<h3 id="conclusion"><strong>Conclusion</strong>:</h3>
+<p>Graph theory provides an elegant and efficient method for analyzing complex circuits. By representing the circuit as a graph, we can apply systematic reductions to calculate the equivalent resistance. The algorithm handles series and parallel combinations iteratively, simplifying even the most complex circuits.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
