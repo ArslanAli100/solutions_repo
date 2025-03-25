@@ -104,6 +104,16 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#uncertainty-propagation-and-impact">Uncertainty Propagation and Impact</a>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#1-pendulum-displacement-vs-time-graph">1. Pendulum Displacement vs. Time Graph</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-histogram-of-time-measurements-for-10-oscillations">2. Histogram of Time Measurements for 10 Oscillations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-uncertainty-propagation-plot">3. Uncertainty Propagation Plot</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-time-vs-length-for-period-calculation">4. Time vs. Length for Period Calculation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#summary-of-graphical-representations">Summary of Graphical Representations:</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -263,6 +273,110 @@ T = \frac{t_{mean}}{10}
 <p>The propagation of uncertainties, especially the timing uncertainty <span class="arithmatex">\( \Delta T \)</span>, can have a significant impact on the final result. As seen in the formula, the uncertainty in <span class="arithmatex">\( g \)</span> increases with the square of <span class="arithmatex">\( \Delta T \)</span>. Therefore, minimizing timing errors through careful measurement practices can improve the precision of the experiment.</p>
 <hr/>
 <p>This method not only gives you an estimate of <span class="arithmatex">\( g \)</span> but also introduces concepts of experimental error and uncertainty analysis, which are crucial in any scientific measurement process.</p>
+<p>Below are some ideas for graphical representations that could help visualize the experiment and analysis of measuring Earth's gravitational acceleration using a pendulum.</p>
+<h3 id="1-pendulum-displacement-vs-time-graph">1. <strong>Pendulum Displacement vs. Time Graph</strong></h3>
+<p>This graph shows the oscillation of the pendulum over time. The displacement (angle or position) of the pendulum is plotted against the time, highlighting the periodic nature of the oscillation.</p>
+<p><img alt="alt text" src="../image.png"/></p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters for the pendulum (just an example)
+g = 9.81  # acceleration due to gravity (m/s^2)
+L = 1.0  # length of the pendulum (meters)
+T = 2 * np.pi * np.sqrt(L / g)  # period of the pendulum (s)
+
+# Time vector for one full period (simulate for one period of motion)
+time = np.linspace(0, T, 1000)
+
+# Simulate the angle of the pendulum with small angle approximation
+theta_max = 0.2  # maximum displacement (in radians, small angle approximation)
+theta = theta_max * np.cos(2 * np.pi * time / T)  # simple harmonic motion
+
+# Plot the displacement vs. time
+plt.figure(figsize=(10, 6))
+plt.plot(time, theta, label="Pendulum Displacement")
+plt.title("Pendulum Displacement vs. Time")
+plt.xlabel("Time (s)")
+plt.ylabel("Displacement (radians)")
+plt.grid(True)
+plt.legend()
+plt.show()
+</code></pre>
+<h3 id="2-histogram-of-time-measurements-for-10-oscillations">2. <strong>Histogram of Time Measurements for 10 Oscillations</strong></h3>
+<p>After collecting measurements for the time of 10 full oscillations, you can plot a histogram to visualize the distribution of the measured times.</p>
+<p><img alt="alt text" src="../image-1.png"/></p>
+<pre><code class="language-python"># Example data (times for 10 oscillations)
+times_10_oscillations = np.array([19.80, 19.90, 19.85, 19.95, 19.70, 19.75, 19.60, 19.90, 19.85, 19.80])
+
+# Plot histogram of the measurements
+plt.figure(figsize=(10, 6))
+plt.hist(times_10_oscillations, bins=5, edgecolor='black')
+plt.title("Histogram of Time Measurements for 10 Oscillations")
+plt.xlabel("Time (s)")
+plt.ylabel("Frequency")
+plt.grid(True)
+plt.show()
+</code></pre>
+<h3 id="3-uncertainty-propagation-plot">3. <strong>Uncertainty Propagation Plot</strong></h3>
+<p>This graph could be used to visualize how the uncertainty in the length measurement and the uncertainty in timing affect the final measurement of gravitational acceleration.</p>
+<p><img alt="alt text" src="../image-2.png"/></p>
+<pre><code class="language-python"># Example uncertainties in length and time
+delta_L = 0.01  # uncertainty in length (meters)
+delta_T = 0.05  # uncertainty in time (seconds)
+
+# Calculate the propagated uncertainty in g
+L = 1.0  # length of pendulum
+T = 2.0  # period in seconds
+
+# Propagate uncertainties
+g_theoretical = 9.81
+g_calculated = (4 * np.pi**2 * L) / T**2
+delta_g = g_calculated * np.sqrt((delta_L / L)**2 + (2 * delta_T / T)**2)
+
+# Plot the uncertainty propagation
+plt.figure(figsize=(10, 6))
+plt.bar(["Calculated g", "Theoretical g"], [g_calculated, g_theoretical], yerr=[delta_g, 0], capsize=5, color=['blue', 'red'])
+plt.title("Gravitational Acceleration with Uncertainty Propagation")
+plt.ylabel("Gravitational Acceleration (m/s^2)")
+plt.show()
+</code></pre>
+<h3 id="4-time-vs-length-for-period-calculation">4. <strong>Time vs. Length for Period Calculation</strong></h3>
+<p>To estimate the period of the pendulum as a function of the length, you can plot a graph showing how the measured period changes as the length of the pendulum changes.</p>
+<p><img alt="alt text" src="../image-3.png"/></p>
+<pre><code class="language-python"># Calculate period for different lengths
+lengths = np.array([0.5, 0.8, 1.0, 1.2, 1.5])
+periods = 2 * np.pi * np.sqrt(lengths / g)
+
+# Plot length vs period
+plt.figure(figsize=(10, 6))
+plt.plot(lengths, periods, marker='o', label="Period vs Length")
+plt.title("Period of Pendulum vs. Length")
+plt.xlabel("Length (m)")
+plt.ylabel("Period (s)")
+plt.grid(True)
+plt.legend()
+plt.show()
+</code></pre>
+<hr/>
+<h3 id="summary-of-graphical-representations"><strong>Summary of Graphical Representations</strong>:</h3>
+<ul>
+<li>
+<p><strong>Pendulum Displacement vs. Time</strong>: This graph shows how the pendulum oscillates over time, which can be used to verify that the motion is harmonic.</p>
+</li>
+<li>
+<p><strong>Histogram of Time Measurements</strong>: Displays the variability in the measured times for 10 oscillations, helping visualize the precision of your timing method.</p>
+</li>
+<li>
+<p><strong>Gravitational Acceleration vs. Length of Pendulum</strong>: This graph compares the calculated gravitational acceleration for different pendulum lengths, showing how closely your measurements align with the theoretical value.</p>
+</li>
+<li>
+<p><strong>Uncertainty Propagation Plot</strong>: This plot highlights how uncertainties in the length and time measurements affect the calculated gravitational acceleration.</p>
+</li>
+<li>
+<p><strong>Period vs. Length for Pendulum</strong>: Shows the relationship between the pendulum's length and the period of oscillation, based on the known theoretical formula.</p>
+</li>
+</ul>
+<p>These visualizations provide a more intuitive understanding of the pendulum experiment and help analyze the uncertainty in your measurements.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
