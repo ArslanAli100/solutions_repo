@@ -22,9 +22,9 @@ The Lorentz force combines both electric and magnetic fields and is responsible 
 ## 2. **Simulating Particle Motion**
 
 The Lorentz force law is given by:
-\[
+$$
 \vec{F} = q(\vec{E} + \vec{v} \times \vec{B})
-\]
+$$
 where:
 - \( q \) is the charge of the particle.
 - \( \vec{E} \) is the electric field.
