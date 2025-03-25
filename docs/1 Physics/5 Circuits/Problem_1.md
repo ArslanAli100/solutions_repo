@@ -1,10 +1,6 @@
 # Problem 1
 
-Sure! Here's the updated version of the main answer, including the code for graphical representations of the circuit and its simplification using graph theory.
-
----
-
-### **Problem: Equivalent Resistance Using Graph Theory**
+Equivalent Resistance Using Graph Theory**
 
 **Motivation**:  
 Calculating equivalent resistance is a fundamental problem in electrical circuits, essential for understanding and designing efficient systems. While traditional methods involve iteratively applying series and parallel resistor rules, these approaches can become cumbersome for complex circuits with many components. Graph theory offers a powerful alternative, providing a structured and algorithmic way to analyze circuits.
